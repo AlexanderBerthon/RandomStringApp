@@ -12,6 +12,15 @@ improvements
  how would this work functionally though?
  have a bunch of separate char arrays and join them? 
  or comlicate the selection algorithm?
+
+ probably the former
+ standard arrays aren't a good idea
+ pretty static, don't like to change sizes
+ could allocate a large amount of space to not have to worry about combining issues, but that feels pretty inefficient
+ as well as not scalable 
+
+ probably better to use a list
+
 */
 
 namespace RandomStringApp {
@@ -21,12 +30,12 @@ namespace RandomStringApp {
     public partial class Form1 : Form {
 
         //Pool of characters to pick from
-        List <char> CharPool;
+        List <char> CharPool = new List<char>();
 
-        List <char> az = new List<char>{'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l',
+        List <char> alphaLower = new List<char>{'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l',
             'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
 
-        List<char> AZ = new List<char>{'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L',
+        List<char> alphaUpper = new List<char>{'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L',
             'M', 'N', 'O', 'P','Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' };
 
         char whiteSpace = ' ';
@@ -57,6 +66,27 @@ namespace RandomStringApp {
             Random rng = new Random();
             String output = "";
 
+            //is there a more efficient way to do all of these checks?
+            if (alphaLower_checkBox.Checked) {
+                CharPool.AddRange(alphaLower);
+            }
+
+            if (alphaUpper_checkBox.Checked) {
+                CharPool.AddRange(alphaUpper);
+            }
+
+            if (numeric_checkBox.Checked) {
+                CharPool.AddRange(numeric);
+            }
+
+            if (symbols_checkBox.Checked) {
+                CharPool.AddRange(symbols);
+            }
+
+            if (space_checkBox.Checked) {
+                CharPool.Add(whiteSpace);
+            }
+
             //'Randomly' select character from pool and add to string
             if (CharPool.Count < 1) {
                 errorLabel.Visible = true;
@@ -69,30 +99,25 @@ namespace RandomStringApp {
             }
 
             outputTextBox.Text = output;
+
+            CharPool.Clear(); //clears out all data for next generation
         }
 
-        private void checkBox_ValueChanged(object sender, EventArgs e) {
-            errorLabel.Visible = false;
 
-            //does this work?
-            if (sender.ToString().Equals("alphaLower_checkBox")) {
-                CharPool.AddRange(az);
-                CharPool.AddRange(test);
-            }
-            else if (sender.ToString().Equals("alphaUpper_checkBox")) {
-                CharPool.AddRange(AZ);
-            }
-            else if (sender.ToString().Equals("symbols_checkBox")) {
-                CharPool.AddRange(symbols);
-            }
-            else if (sender.ToString().Equals("numeric_checkBox")) {
-                CharPool.AddRange(numeric);
-            }
-            else if (sender.ToString().Equals("space_checkBox")) {
-                CharPool.Add(whiteSpace);
-            }
+        //I don't want to make an interaction function for every single check box
+        //because I would be repeating some code like 6 times
+        //but combining all the logic in one function is very messy
+        //both options are bad
+        //
 
-        }
+        //why should I do work when the user clicks the box?
+        //what if the user clicks the box 10 times?
+        //then I am modifying the list 10 times
+        //that's stupid
+        //instead, when the user clicks the generate button, check all the boxes and make ONE modification
+        //
+
+
 
     }
 }
