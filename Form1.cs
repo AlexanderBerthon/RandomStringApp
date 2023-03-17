@@ -3,24 +3,18 @@ using System.Security.Cryptography;
 
 /*
 improvements
- - add checkboxes to allow user to control what kind of characters to include?
-    - lowercase alphabet a-z
-    - numbers            0-9
-    - uppercase          A-Z
-    - symbols            !?#
-    - whitespace         ' '
- how would this work functionally though?
- have a bunch of separate char arrays and join them? 
- or comlicate the selection algorithm?
+ - kind of bad to have a string start or end with whitespace
+ - whitespace is only 1 character in the array. the chance of it showing up in a random string
+could be as low as.. 8.42% if all options are selected. Is that a problem? not enough representation?
 
- probably the former
- standard arrays aren't a good idea
- pretty static, don't like to change sizes
- could allocate a large amount of space to not have to worry about combining issues, but that feels pretty inefficient
- as well as not scalable 
+here is a representation chart for each option (again based on all options selected)
 
- probably better to use a list
-
+-chance at least 1 character from list is represented in random 8 char string (all options selected)-
+alphaLower = 
+alphaUpper = 
+symbol     = 
+whitespace =  
+numeric    = 
 */
 
 namespace RandomStringApp {
@@ -46,14 +40,11 @@ namespace RandomStringApp {
         
         List<char> numeric = new List<char>() { '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' };
 
-        List<char> test = new List<char>();
-
         //variable to control length of output string
         int length = 8;
         
         public Form1() {
             InitializeComponent();
-            test.Add('a');
         }
 
         //changes length variable to match UI selection
@@ -92,13 +83,19 @@ namespace RandomStringApp {
                 errorLabel.Visible = true;
             }
             else {
-                for (int i = 0; i < this.length; i++) {
-                    int randomIndex = rng.Next(CharPool.Count());
-                    output += CharPool[randomIndex];
+                int testcount = 0;
+                for (int t = 0; t < 100000; t++) {
+                    for (int i = 0; i < this.length; i++) {
+                        int randomIndex = rng.Next(CharPool.Count());
+                        output += CharPool[randomIndex];
+                    }
+                    if(output.Contains(" ")){
+                        testcount++;
+                    }
+                    output = "";
                 }
+                outputTextBox.Text = testcount.ToString();
             }
-
-            outputTextBox.Text = output;
 
             CharPool.Clear(); //clears out all data for next generation
         }
