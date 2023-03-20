@@ -12,6 +12,8 @@ User can control what character sets are included in the string
 
 \**At least 1 character set must be selected (other than whitespace)
 
+https://user-images.githubusercontent.com/71737894/226484702-00c35cae-3360-4a0b-b69e-89c20d387d58.mp4
+
 __________________________________________________________________
 
 Notes:
