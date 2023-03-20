@@ -1,7 +1,8 @@
 # RandomStringApp
 Random String Generator App
 
-User can control the length of the string between 8-20 characters
+Length of the string can be adjusted to be between 8-20 characters
+
 User can control what character sets are included in the string
  - lower case alphabetical characters
  - upper case alphabetical characters
@@ -9,7 +10,7 @@ User can control what character sets are included in the string
  - symbols
  - whitespace
 
-at least 1 character set must be selected (other than whitespace)
+\**At least 1 character set must be selected (other than whitespace)
 
 __________________________________________________________________
 
@@ -28,3 +29,22 @@ Chance at least 1 character from character set is represented in random 8 char s
 Should all sets be equal in probability? 
 There is a representation skew specifically around whitespace and numeric.
 Could be solved by duplicating data within these pools until they are around the same size as the other pools but is that a good idea?
+
+__________________________________________________________________
+
+Updated probabilities:
+
+Balanced each of the categories to be more or less even.
+Fixed resulting issues due to the increased amount of whitespace. 
+ - string cannot begin or end with whitespace
+ - string cannot contain consecutive whitespaces
+
+\**Whitespace representation is lower than the calculated probability due to these restrictions. New represented values below.
+
+Chance at least 1 character from character set is represented in random 8 char string (all options selected)
+ - symbol     = 96.26%
+ - alphaLower = 92.26%
+ - alphaUpper = 92.26%
+ - numeric    = 95.20%
+ - whitespace = 91.31% (~69.47%)
+ 
