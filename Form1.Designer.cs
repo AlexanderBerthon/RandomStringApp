@@ -102,6 +102,7 @@
             this.alphaLower_checkBox.TabIndex = 4;
             this.alphaLower_checkBox.Text = "a-z";
             this.alphaLower_checkBox.UseVisualStyleBackColor = true;
+            this.alphaLower_checkBox.CheckedChanged += new System.EventHandler(this.checkBox_CheckedChanged);
             // 
             // alphaUpper_checkBox
             // 
@@ -113,6 +114,7 @@
             this.alphaUpper_checkBox.TabIndex = 5;
             this.alphaUpper_checkBox.Text = "A-Z";
             this.alphaUpper_checkBox.UseVisualStyleBackColor = true;
+            this.alphaUpper_checkBox.CheckedChanged += new System.EventHandler(this.checkBox_CheckedChanged);
             // 
             // symbols_checkBox
             // 
@@ -124,6 +126,7 @@
             this.symbols_checkBox.TabIndex = 6;
             this.symbols_checkBox.Text = "!@#";
             this.symbols_checkBox.UseVisualStyleBackColor = true;
+            this.symbols_checkBox.CheckedChanged += new System.EventHandler(this.checkBox_CheckedChanged);
             // 
             // space_checkBox
             // 
@@ -135,6 +138,7 @@
             this.space_checkBox.TabIndex = 7;
             this.space_checkBox.Text = "space";
             this.space_checkBox.UseVisualStyleBackColor = true;
+            this.space_checkBox.CheckedChanged += new System.EventHandler(this.checkBox_CheckedChanged);
             // 
             // numeric_checkBox
             // 
@@ -146,6 +150,7 @@
             this.numeric_checkBox.TabIndex = 8;
             this.numeric_checkBox.Text = "0-9";
             this.numeric_checkBox.UseVisualStyleBackColor = true;
+            this.numeric_checkBox.CheckedChanged += new System.EventHandler(this.checkBox_CheckedChanged);
             // 
             // errorLabel
             // 
