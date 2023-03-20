@@ -1,4 +1,5 @@
 using System;
+using System.Drawing.Text;
 using System.Security.Cryptography;
 
 /*
@@ -23,11 +24,6 @@ improvements
 
     issue with having more common whitespace.. if it triggers back to back it gets confusing li   ke how many spaces is that?
     1a. back-to-back whitespace.. p   assword
-
- 2. error message not clearing after good input
-
-
-
 */
 
 namespace RandomStringApp {
@@ -74,7 +70,7 @@ namespace RandomStringApp {
             Random rng = new Random();
             String output = "";
 
-            //is there a more efficient way to do all of these checks?
+            //check for and apply user preferences
             if (alphaLower_checkBox.Checked) {
                 CharPool.AddRange(alphaLower);
             }
@@ -109,28 +105,43 @@ namespace RandomStringApp {
             else {
                 int randomIndex = 0;
                 
+                //generate string
                 for (int i = 0; i < this.length; i++) {
-                    //case included to prevent string beginning or ending in a whitespace
-                    if(i == 0 || i == this.length - 1) {
-                        char noSpace = ' ';
-                        while(noSpace == ' ') {
-                            randomIndex = rng.Next(CharPool.Count());
-                            noSpace = CharPool[randomIndex];
-                        }
+                    randomIndex = rng.Next(CharPool.Count());
+
+                    //prevent first character from being whitespace
+                    if (CharPool[randomIndex] == ' ' && i == 0) {
+                        randomIndex = regenerate(randomIndex);
                     }
-                    else {
-                        randomIndex = rng.Next(CharPool.Count());
+                    //prevent last character from being whitespace
+                    else if (CharPool[randomIndex] == ' ' && i == this.length - 1) {
+                        randomIndex = regenerate(randomIndex);
                     }
-                        output += CharPool[randomIndex];
+                    //prevent multiple whitespace in a row
+                    else if (CharPool[randomIndex] == ' ' && output.Last().Equals(' ')) { //will this throw an error at i = 0?
+                        randomIndex = regenerate(randomIndex);
+                    }
+
+                    output += CharPool[randomIndex];
                 }
             }
             outputTextBox.Text = output;
-            CharPool.Clear(); //clears out all data for next generation
+            CharPool.Clear(); //clears out data for next generation
+
+            //helper function to regenerate random index
+            int regenerate(int value) {
+                char noSpace = ' ';
+                while (noSpace == ' ') {
+                    value = rng.Next(CharPool.Count());
+                    noSpace = CharPool[value];
+                }
+                return value;
+            }
         }
 
+        //function to clear error label
         private void checkBox_CheckedChanged(object sender, EventArgs e) {
             errorLabel.Visible = false;
         }
-
     }
 }
