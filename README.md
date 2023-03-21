@@ -14,6 +14,12 @@ User can control what character sets are included in the string
 
 https://user-images.githubusercontent.com/71737894/226484702-00c35cae-3360-4a0b-b69e-89c20d387d58.mp4
 
+How to install:
+
+1. Download the entire 'publish' folder
+
+2. run setup.exe
+
 __________________________________________________________________
 
 Notes:
