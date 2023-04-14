@@ -13,8 +13,9 @@ User can control what character sets are included in the string
 \**At least 1 character set must be selected (other than whitespace)
 
 https://user-images.githubusercontent.com/71737894/226484702-00c35cae-3360-4a0b-b69e-89c20d387d58.mp4
+__________________________________________________________________
 
-How to install:
+<H2>How to install:</H2>
 
 1. Download the entire 'publish' folder
 
@@ -22,7 +23,7 @@ How to install:
 
 __________________________________________________________________
 
-Notes:
+<h2>Notes:</h2>
 
 Whitespace is only 1 character in the array. The chance of it showing up in a random string
 could be as low as.. 8.12% if all options are selected in an 8-character string (worse if longer). Is that a problem? not enough representation?
@@ -40,7 +41,7 @@ Could be solved by duplicating data within these pools until they are around the
 
 __________________________________________________________________
 
-Updated probabilities:
+<h3>Updated probabilities:</h3>
 
 Balanced each of the categories to be more or less even.
 Fixed resulting issues due to the increased amount of whitespace. 
