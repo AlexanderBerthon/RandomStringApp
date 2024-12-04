@@ -5,7 +5,6 @@ using System.Security.Cryptography;
 namespace RandomStringApp {
 
     public partial class Form1 : Form {
-
         //Pool of characters to pick from
         List <char> CharPool = new List<char>();
 
@@ -26,7 +25,7 @@ namespace RandomStringApp {
             '3', '4', '5', '6', '7', '8', '9', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0'};
 
         //variable to control length of output string
-        int length = 8;
+        int length = 4;
         
         public Form1() {
             InitializeComponent();
@@ -40,7 +39,7 @@ namespace RandomStringApp {
         //generate output string on click 
         private void generateBtn_Click(object sender, EventArgs e) {
             Random rng = new Random();
-            String output = "";
+            String output = "";                
 
             //check for and apply user preferences
             if (alphaLower_checkBox.Checked) {
@@ -64,12 +63,14 @@ namespace RandomStringApp {
             }
 
             //'Randomly' select a char from the pool and add to string
-            if (CharPool.Count < 1 || CharPool.Count == 25) { //can't generate string from empty pool; can't generate string from pool of whitespace (the whitespace array is size 25 specifically as a flag value)
+            //can't generate string from an empty pool;
+            //can't generate string from a pool of whitespace (whitespace array is size = 25 as a flag value. no combination of options = 25 except if whitespace is the only option)
+            if (CharPool.Count < 1 || CharPool.Count == 25) { //can't generate string from empty pool; can't 
                 errorLabel.Visible = true;
             }
             else {
                 int randomIndex = 0;
-                
+
                 //generate string
                 for (int i = 0; i < this.length; i++) {
                     randomIndex = rng.Next(CharPool.Count());
@@ -90,6 +91,7 @@ namespace RandomStringApp {
                     output += CharPool[randomIndex];
                 }
             }
+
             outputTextBox.Text = output;
             CharPool.Clear(); //clears out data for next generation
 
